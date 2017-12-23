@@ -10,7 +10,7 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
 
-    let itemArray = ["To do 1","To do 2","To do 3"]
+    var itemArray = [""]
     
     
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        print(itemArray[indexPath.row])
+        //print(itemArray[indexPath.row])
         
         if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
             
@@ -59,7 +59,51 @@ class TodoListViewController: UITableViewController {
         
     }
     
+    //MARK - Add New Items
+    
+    
+    @IBAction func addButtomPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New Todoye Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            //what will happen once  the user press Add Item buttom on our UIAlert
+            self.itemArray.append(textField.text!)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+        alert.addTextField { (alertTextField) in
+            
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+         
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
+        
+    }
+    
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
